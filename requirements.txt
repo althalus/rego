@@ -1,0 +1,9 @@
+Flask
+SQLAlchemy
+Flask-SQLAlchemy
+Flask-WTF
+Flask-Assets
+Flask-Script
+gunicorn
+Flask-Restful
+Flask-Migrate
