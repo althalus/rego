@@ -32,8 +32,8 @@ class User(db.Model):
     registration_expiry = db.Column(db.DateTime)
 
 
-class Registration(db.Model):
-    __tablename__ = 'registration'
+class Device(db.Model):
+    __tablename__ = 'device'
     rego_id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer)
     registration_date = db.Column(db.DateTime)
