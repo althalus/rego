@@ -7,3 +7,4 @@ Flask-Script
 gunicorn
 Flask-Restful
 Flask-Migrate
+flask-bcrypt

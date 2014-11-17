@@ -1,6 +1,6 @@
 import os
 from flask import Flask
-from models import db, migrate
+from models import db, migrate, bcrypt
 
 
 def create_app(config=None, env=None):
@@ -30,6 +30,7 @@ def create_app(config=None, env=None):
     # Set up plugins
     db.init_app(app)
     migrate.init_app(app, db)
+    bcrypt.init_app(app)
 
     if app.debug:
         from flask_debugtoolbar import DebugToolbarExtension

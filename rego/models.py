@@ -1,8 +1,10 @@
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.migrate import Migrate
+from flask.ext.bcrypt import Bcrypt
 
 db = SQLAlchemy()
 migrate = Migrate()
+bcrypt = Bcrypt()
 
 
 class User(db.Model):
@@ -30,6 +32,12 @@ class User(db.Model):
     registration_date = db.Column(db.DateTime)
     renewal_date = db.Column(db.DateTime)
     registration_expiry = db.Column(db.DateTime)
+
+    def hash_password(self):
+        self.password = bcrypt.generate_password_hash(self.password)
+
+    def check_password(self, password):
+        return bcrypt.check_password_hash(self.password, password)
 
 
 class Device(db.Model):
