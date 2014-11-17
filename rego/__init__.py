@@ -17,9 +17,9 @@ def create_app(config=None, env=None):
 
     # Load config object
     if env is None:
-        env = os.environ.get('DASH_ENV', 'prod')
+        env = os.environ.get('REGO_ENV', 'prod')
     if config is None:
-        config = 'dash.settings.%sConfig' % env.capitalize()
+        config = 'rego.settings.%sConfig' % env.capitalize()
 
     app.config.from_object(config)
 
@@ -39,11 +39,8 @@ def create_app(config=None, env=None):
     from views.main import main
     app.register_blueprint(main)
 
-    from main.api import api
+    from views.api import api
     api.init_app(app)
-
-    from main.saml import saml
-    app.register_blueprint(saml, url_prefix='/saml')
 
     # Load extra jinja stuff
     app.jinja_env.add_extension('jinja2.ext.do')
@@ -51,5 +48,5 @@ def create_app(config=None, env=None):
     return app
 
 if __name__ == '__main__':
-    env = os.environ.get('DASH_ENV', 'prod')
+    env = os.environ.get('REGO_ENV', 'prod')
     app = create_app('dash.settings.%sConfig' % env.capitalize(), env=env)
