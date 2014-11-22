@@ -25,6 +25,8 @@ class LoginAPI(Resource):
         if form.validate_on_submit():
             user = User.query.filter_by(username=form.username.value).first()
             if user.check_password(form.password):
+                if len(user.devices) > user.registrations_max:
+                    return {'errors': 'Maximum registrations reached'}, 401
                 device = Device()
                 device.user = user
                 device.registration_id = form.device_id

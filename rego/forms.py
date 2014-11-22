@@ -7,14 +7,16 @@ from wtforms import fields, validators
 
 class Unique(object):
     """ validator that checks field uniqueness """
-    def __init__(self, model, field, message=None):
-        self.model = model
+    def __init__(self, model, field,  message=None):
+        self.model = model_form
         self.field = field
         if not message:
             message = u'this element already exists'
         self.message = message
 
     def __call__(self, form, field):
+        if field.object_data == field.data:
+            return
         check = self.model.query.filter(self.field == field.data).first()
         if check:
             raise validators.ValidationError(self.message)

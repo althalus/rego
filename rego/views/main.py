@@ -34,7 +34,7 @@ def list_users():
     return render_template('users/list.html', users=users)
 
 
-@main.route('/user/<id>')
+@main.route('/user/<id>', methods=['GET', 'POST'])
 @login_required
 def edit_user(id):
     user = User.query.filter_by(user_id=id).first()
@@ -65,3 +65,9 @@ def change_password(id):
 def logout():
     logout_user()
     return redirect(url_for('main.login'))
+
+@main.route('/user/<id>/registrations')
+@login_required
+def list_registrations(id):
+    user = User.query.filter_by(user_id=id).first()
+    return render_template('registrations/list.html', user=user)

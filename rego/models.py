@@ -58,6 +58,7 @@ class User(db.Model):
     registration_date = db.Column(db.DateTime)
     renewal_date = db.Column(db.DateTime)
     registration_expiry = db.Column(db.DateTime)
+    registrations_max = db.Column(db.Integer, default=3)
 
     def hash_password(self):
         self.password = bcrypt.generate_password_hash(self.password)
@@ -69,7 +70,10 @@ class User(db.Model):
 class Device(db.Model):
     __tablename__ = 'device'
     rego_id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer)
+    user_id = db.Column(db.ForeignKey('user.user_id'))
     registration_date = db.Column(db.DateTime)
     last_check_date = db.Column(db.DateTime)
     registration_key = db.Column(db.String(255))
+    device_name = db.Column(db.String(255))
+
+    user = db.relationship('User', backref='devices')
