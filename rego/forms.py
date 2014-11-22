@@ -1,3 +1,4 @@
+from flask import url_for
 from flask_wtf import Form
 from wtforms.ext.sqlalchemy.orm import model_form
 from rego.models import db, User, Admin
@@ -23,7 +24,7 @@ UserForm = model_form(User,
                       db.session,
                       Form,
                       only=[
-                          'username', 'password', 'name',
+                          'username', 'name',
                           'email', 'phone', 'company',
                           'address1', 'address2',
                           'postcode', 'city', 'country',
@@ -66,3 +67,9 @@ class LoginForm(Form):
 
     def get_user(self):
         return Admin.query.filter_by(username=self.username.data).first()
+
+
+class PasswordForm(Form):
+    password = fields.PasswordField('Password', [validators.required(),
+                                                validators.EqualTo('confirm', message='Passwords must match') ])
+    confirm = fields.PasswordField('Repeat Password')
