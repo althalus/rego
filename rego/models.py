@@ -7,6 +7,32 @@ migrate = Migrate()
 bcrypt = Bcrypt()
 
 
+class Admin(db.Model):
+    __tablename__ = 'admin'
+
+    admin_id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(255))
+    password = db.Column(db.String(255))
+
+    def hash_password(self):
+        self.password = bcrypt.generate_password_hash(self.password)
+
+    def check_password(self, password):
+        return bcrypt.check_password_hash(self.password, password)
+
+    def get_id(self):
+        return self.admin_id
+
+    def is_authenticated(self):
+        return self.admin_id > 0
+
+    def is_anonymous(self):
+        return not self.admin_id
+
+    def is_active(self):
+        return True
+
+
 class User(db.Model):
     __tablename__ = 'user'
 

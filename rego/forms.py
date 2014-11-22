@@ -1,6 +1,6 @@
 from flask_wtf import Form
 from wtforms.ext.sqlalchemy.orm import model_form
-from rego.models import db, User
+from rego.models import db, User, Admin
 from wtforms import fields, validators
 
 
@@ -50,3 +50,19 @@ class SignupForm(Form):
     username = fields.StringField('username', [validators.required()])
     password = fields.StringField('password', [validators.required()])
     device_id = fields.StringField('Device ID', [validators.required()])
+
+
+class LoginForm(Form):
+    username = fields.StringField('username', [validators.required()])
+    password = fields.PasswordField('password', [validators.required()])
+
+    def validate_username(self, field):
+        user = self.get_user()
+        if user is None:
+            raise validators.ValidationError("Username or password does not match")
+
+        if not user.check_password(self.password.data):
+            raise validators.ValidationError("Username or password does not match")
+
+    def get_user(self):
+        return Admin.query.filter_by(username=self.username.data).first()

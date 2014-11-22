@@ -37,7 +37,8 @@ def create_app(config=None, env=None):
         DebugToolbarExtension(app)
 
     # register blueprints
-    from views.main import main
+    from views.main import main, login_manager
+    login_manager.init_app(app)
     app.register_blueprint(main)
 
     from views.api import api
