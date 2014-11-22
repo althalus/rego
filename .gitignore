@@ -43,3 +43,6 @@ env*
 
 # Rope
 .ropeproject
+
+# Sqlite
+*.db
