@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Deleting Registration</h2>
+<div class="alert alert-danger"><p>Are you sure you want to proceed? This can't be undone.</p>
+    <form action="" method="POST">
+        <input type="submit" name="submit" value="Yes, delete it." class="btn btn-danger">
+        <input type="button" name="goback" value="Cancel" onclick="history.back(-1)" class="btn">
+    </form>
+</div>
+{% endblock %}

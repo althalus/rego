@@ -1,6 +1,6 @@
 from flask_login import login_user, LoginManager, logout_user, login_required
 from flask import Blueprint, render_template, redirect, url_for, request, flash
-from rego.models import db, User, Admin
+from rego.models import db, User, Admin, Device
 from rego.forms import LoginForm, UserForm, PasswordForm
 
 
@@ -71,3 +71,14 @@ def logout():
 def list_registrations(id):
     user = User.query.filter_by(user_id=id).first()
     return render_template('registrations/list.html', user=user)
+
+@main.route('/registration/<id>/delete', methods=['GET', 'POST'])
+@login_required
+def delete_registration(id):
+    rego = Device.query.filter_by(rego_id=id).first()
+    user = rego.user
+    if request.method == 'POST':
+        db.session.delete(rego)
+        db.session.commit()
+        return redirect(url_for('main.list_registrations', id=user.user_id))
+    return render_template('registrations/delete.html')
