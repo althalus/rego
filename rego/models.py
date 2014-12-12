@@ -40,6 +40,9 @@ class User(db.Model):
     STATUS_ACTIVE = 'active'
     STATUS_EXPIRED = 'expired'
 
+    TYPE_ADMIN = 'admin'
+    TYPE_USER = 'user'
+
     user_id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(255))
     password = db.Column(db.String(255))
@@ -55,6 +58,7 @@ class User(db.Model):
     country = db.Column(db.String(255))
     locksmith_licence = db.Column(db.String(255))
     account_status = db.Column(db.String(255))
+    account_type = db.Column(db.String(255))
     registration_date = db.Column(db.DateTime)
     renewal_date = db.Column(db.DateTime)
     registration_expiry = db.Column(db.DateTime)
@@ -65,6 +69,18 @@ class User(db.Model):
 
     def check_password(self, password):
         return bcrypt.check_password_hash(self.password, password)
+
+    def get_id(self):
+        return self.user_id
+
+    def is_authenticated(self):
+        return self.user_id > 0
+
+    def is_anonymous(self):
+        return not self.user_id
+
+    def is_active(self):
+        return True
 
 
 class Device(db.Model):

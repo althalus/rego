@@ -68,10 +68,10 @@ class LoginForm(Form):
             raise validators.ValidationError("Username or password does not match")
 
     def get_user(self):
-        return Admin.query.filter_by(username=self.username.data).first()
+        return User.query.filter_by(username=self.username.data).first()
 
 
 class PasswordForm(Form):
     password = fields.PasswordField('Password', [validators.required(),
-                                                validators.EqualTo('confirm', message='Passwords must match') ])
+                                                 validators.EqualTo('confirm', message='Passwords must match') ])
     confirm = fields.PasswordField('Repeat Password')

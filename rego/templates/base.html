@@ -36,15 +36,15 @@
 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 <ul class="nav navbar-nav">
 {% set navbar_links = [
-('main.list_users', 'Users'),
+('admin.list_users', 'Users'),
 ] -%}
-{% set active_page = active_page|default('main.list_applications') -%}
+{% set active_page = active_page|default('admin.list_applications') -%}
 {% for urlname, caption in navbar_links %}
 <li{% if urlname == active_page %} class="active"{% endif %}><a href="{{url_for(urlname)}}">{{ caption }}</a></li>
 {% endfor %}
 </ul>
 <ul class="nav navbar-nav navbar-right">
-    <li class-"navbar-right"><a href="{{ url_for("main.logout")}}">Logout</a></li>
+    <li class-"navbar-right"><a href="{{ url_for("login.logout")}}">Logout</a></li>
 </ul>
 </div><!-- /.navbar-collapse -->
 </div><!-- /.container-fluid -->

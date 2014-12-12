@@ -2,9 +2,12 @@ Flask
 SQLAlchemy
 Flask-SQLAlchemy
 Flask-WTF
+wtforms
 Flask-Assets
 Flask-Script
 gunicorn
 Flask-Restful
 Flask-Migrate
 flask-bcrypt
+flask-login
+flask-debugtoolbar
