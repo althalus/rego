@@ -1,9 +1,15 @@
+import os
+
+
 class Config(object):
-    pass
+    SECRET_KEY = os.environ.get('SECRET_KEY')
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URI')
+    STRIPE_KEY = os.environ.get('STRIPE_KEY')
+    STRIPE_PUBLIC_KEY = os.environ.get('STRIPE_PUBLIC_KEY')
 
 
 class ProdConfig(object):
-    pass
+    DEBUG = False
 
 
 class DevConfig(object):
