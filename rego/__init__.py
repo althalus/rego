@@ -39,9 +39,11 @@ def create_app(config=None, env=None):
     # register blueprints
     from views.admin import admin
     from views.login import login, login_manager
+    from views.main import main
     login_manager.init_app(app)
     app.register_blueprint(admin, url_prefix='/admin')
     app.register_blueprint(login)
+    app.register_blueprint(main)
 
     from views.api import api
     api.init_app(app)

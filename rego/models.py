@@ -63,6 +63,8 @@ class User(db.Model):
     renewal_date = db.Column(db.DateTime)
     registration_expiry = db.Column(db.DateTime)
     registrations_max = db.Column(db.Integer, default=3)
+    customer_token = db.Column(db.String(255))
+    subscription_token = db.Column(db.String(255))
 
     def hash_password(self):
         self.password = bcrypt.generate_password_hash(self.password)

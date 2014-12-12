@@ -33,3 +33,8 @@ def signin():
 def logout():
     logout_user()
     return redirect(url_for('admin.login'))
+
+
+@login.route('/signup', methods=['POST'])
+def signup():
+    pass

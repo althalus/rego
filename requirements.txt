@@ -11,3 +11,4 @@ Flask-Migrate
 flask-bcrypt
 flask-login
 flask-debugtoolbar
+stripe
