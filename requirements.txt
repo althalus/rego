@@ -12,3 +12,4 @@ flask-bcrypt
 flask-login
 flask-debugtoolbar
 stripe
+flask-oauthlib
